@@ -1,5 +1,7 @@
 <h1>Movies Index</h1>
-<% @movies.each do |movie| %>
-<p>movie.title</p>
-<p>movie.release_year</p>
+<% @movies.each do |m| %>
+<%= m.title %>
+<img src="<%= url_for(m.poster) if m.poster.attached? %>">
+<%= m.synopsis %>
+<%= m.release_year %>
 <% end %>

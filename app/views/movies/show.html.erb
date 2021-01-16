@@ -1,0 +1,4 @@
+<%= @movie.title %>
+<img src="<%= url_for(@movie.poster) if @movie.poster.attached? %>">
+<%= @movie.synopsis %>
+<%= @movie.release_year %>
