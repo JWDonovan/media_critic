@@ -44,3 +44,5 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
+
+gem 'devise', '~> 4.7', '>= 4.7.3'
