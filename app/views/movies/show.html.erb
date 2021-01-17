@@ -10,4 +10,4 @@
   <%= r.submit %>
 <% end %>
 <!--<%= render template: 'reviews/new', locals: { review: Review.new } %>-->
-<%= render template: 'reviews/index', locals: { reviews: Review.all } %>
+<%= render template: 'reviews/index', locals: { reviews: @movie.reviews } %>

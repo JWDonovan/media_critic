@@ -1,4 +1,9 @@
-<%= form_with model: :review do |f| %>
+<%= form_with model: @review do |f| %>
+  <% if @review.movie.nil? %>
+    <%= f.select :movie_id, options_from_collection_for_select(Movie.all, :id, :title) %>
+  <% end %>
+  <%= f.hidden_field :movie_id %>
+
   <%= f.text_field :title %>
   <%= f.rich_text_area :content %>
   <%= f.number_field :rating %>
