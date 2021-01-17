@@ -6,6 +6,7 @@ AllCops:
 Layout/LineLength:
   Exclude:
     - config/initializers/devise.rb
+    - db/seeds.rb
 
 Metrics/MethodLength:
   Exclude:

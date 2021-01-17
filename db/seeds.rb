@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 movie_list = [
   [
     'Die Hard',
