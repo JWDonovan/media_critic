@@ -14,7 +14,11 @@ class ReviewsController < ApplicationController
 
   # /reviews/new
   def new
-    @review = Review.new
+    if params[:movie_id] && !Movie.exists?(params[:movie_id])
+      redirect_to movies_path, alert: 'Movie not found'
+    else
+      @review = Review.new(movie_id: params[:movie_id])
+    end
   end
 
   # POST /reviews
@@ -29,7 +33,20 @@ class ReviewsController < ApplicationController
   end
 
   # /reviews/:id/edit
-  def edit; end
+  def edit
+    if params[:movie_id]
+      movie = Movie.find_by(id: params[:movie_id])
+
+      if movie.nil?
+        redirect_to movies_path, alert: 'Movie not found'
+      else
+        @review = movie.reviews.find_by(id: params[:id])
+        redirect_to movie_reviews_path(movie), alert: 'Review not found' if @review.nil?
+      end
+    else
+      @review = Review.find(params[:id])
+    end
+  end
 
   # PATCH /reviews/:id
   def update
