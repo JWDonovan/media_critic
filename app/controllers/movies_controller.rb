@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class MoviesController < ApplicationController
-  before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  before_action :set_movie, only: %i[show edit update destroy]
 
   # /movies
   def index
@@ -7,8 +9,7 @@ class MoviesController < ApplicationController
   end
 
   # /movies/:id
-  def show
-  end
+  def show; end
 
   # /movies/new
   def new
@@ -27,8 +28,7 @@ class MoviesController < ApplicationController
   end
 
   # /movies/:id/edit
-  def edit
-  end
+  def edit; end
 
   # PATCH /movies/:id
   def update

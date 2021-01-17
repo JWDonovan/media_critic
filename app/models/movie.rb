@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Movie < ApplicationRecord
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   accepts_nested_attributes_for :reviews
 
   has_rich_text :synopsis
