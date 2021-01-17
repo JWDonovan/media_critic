@@ -2,3 +2,12 @@
 <img src="<%= url_for(@movie.poster) if @movie.poster.attached? %>">
 <%= @movie.synopsis %>
 <%= @movie.release_year %>
+
+<%= fields_for :review, Review.new do |r| %>
+  <%= r.text_field :title %>
+  <%= r.rich_text_area :content %>
+  <%= r.number_field :rating %>
+  <%= r.submit %>
+<% end %>
+<!--<%= render template: 'reviews/new', locals: { review: Review.new } %>-->
+<%= render template: 'reviews/index', locals: { reviews: Review.all } %>
