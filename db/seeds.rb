@@ -1,5 +1,28 @@
 # frozen_string_literal: true
 
+user_list = [
+  [
+    'user@gmail.com',
+    'password',
+    false
+  ],
+  [
+    'admin@gmail.com',
+    'password',
+    true
+  ]
+]
+
+user_list.each do |email, password, admin|
+  user = User.new(
+    email: email,
+    password: password,
+    admin: admin
+  )
+
+  user.save
+end
+
 movie_list = [
   [
     'Die Hard',
@@ -42,4 +65,26 @@ movie_list.each do |title, synopsis, release_year, filename|
 
   movie.poster.attach(io: File.open("app/assets/images/#{filename}"), filename: filename, content_type: 'image/jpeg')
   movie.save
+end
+
+review_list = [
+  [
+    'Die Hard is my favorite movie',
+    'Not sure if it\'s a Christmas movie though.',
+    4.0,
+    Movie.first.id,
+    User.first.id
+  ]
+]
+
+review_list.each do |title, content, rating, movie_id, user_id|
+  review = Review.new(
+    title: title,
+    content: content,
+    rating: rating,
+    movie_id: movie_id,
+    user_id: user_id
+  )
+
+  review.save
 end
