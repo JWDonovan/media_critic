@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_review, only: %i[show edit update destroy]
 
   # /reviews
@@ -66,7 +67,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:title, :content, :rating, :movie_id)
+    params.require(:review).permit(:title, :content, :rating, :movie_id, user_id: current_user.id)
   end
 
   def set_review
