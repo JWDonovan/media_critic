@@ -46,3 +46,5 @@ group :development do
 end
 
 gem 'devise', '~> 4.7', '>= 4.7.3'
+gem 'omniauth', '~> 1.9.1'
+gem 'omniauth-google-oauth2', '~> 0.8.1'
