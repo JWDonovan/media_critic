@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 2021_01_16_195801) do
     t.string "email", null: false
     t.string "encrypted_password", null: false
     t.boolean "admin", default: false, null: false
+    t.string "provider", default: "", null: false
+    t.string "uid", default: "", null: false
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
