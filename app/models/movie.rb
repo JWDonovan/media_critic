@@ -9,4 +9,8 @@ class Movie < ApplicationRecord
   has_one_attached :poster
 
   validates :title, :release_year, presence: true
+
+  def self.default_scope
+    order('created_at DESC')
+  end
 end
