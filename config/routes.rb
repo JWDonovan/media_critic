@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :reviews
 
   resources :movies, only: [:show] do
-    resources :reviews, only: %i[new edit show]
+    resources :reviews, only: %i[new edit show index]
   end
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
