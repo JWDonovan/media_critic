@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class MoviesController < ApplicationController
+  layout 'with_header'
+
   before_action :authenticate_user!, except: %i[index show]
+  before_action :admin?, except: %i[index show]
   before_action :set_movie, only: %i[show edit update destroy]
 
   # /movies
@@ -54,5 +57,9 @@ class MoviesController < ApplicationController
 
   def set_movie
     @movie = Movie.find(params[:id])
+  end
+
+  def admin?
+    redirect_to movies_path unless current_user.admin?
   end
 end
