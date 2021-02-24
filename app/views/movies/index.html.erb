@@ -1,9 +1,27 @@
-<%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %>
+<div class="container is-max-desktop" style="max-width: 800px;">
+  <h1 class="title">Movies</h1>
 
-<h1>Movies Index</h1>
-<% @movies.each do |m| %>
-<%= m.title %>
-<img src="<%= url_for(m.poster) if m.poster.attached? %>">
-<%= m.synopsis %>
-<%= m.release_year %>
-<% end %>
+  <% @movies.each do |m| %>
+    <%= link_to m, class: "has-text-black mb-6" do %>
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-128x128">
+            <img src="<%= url_for(m.poster) if m.poster.attached? %>">
+          </p>
+        </figure>
+
+        <div class="media-content">
+          <div class="content">
+            <strong><%= m.title %></strong> <small><%= m.release_year %></small>
+            <br>
+            <%= m.synopsis %>
+          </div>
+        </div>
+      </article>
+    <% end %>
+
+    <!-- add edit and delete movie buttons when user is admin -->
+
+    <hr style="background-color: #2222; margin-top: 5em;">
+  <% end %>
+</div>

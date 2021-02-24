@@ -1,13 +1,43 @@
-<%= @movie.title %>
-<img src="<%= url_for(@movie.poster) if @movie.poster.attached? %>">
-<%= @movie.synopsis %>
-<%= @movie.release_year %>
+<div class="container is-max-desktop" style="max-width: 800px;">
+  <%= link_to @movie, class: "has-text-black" do %>
+    <strong class="title"><%= @movie.title %></strong> <small class="subtitle"><%= @movie.release_year %></small>
+  <% end %>
 
-<%= fields_for :review, Review.new do |r| %>
-  <%= r.text_field :title %>
-  <%= r.rich_text_area :content %>
-  <%= r.number_field :rating %>
-  <%= r.submit %>
-<% end %>
-<!--<%= render template: 'reviews/new', locals: { review: Review.new } %>-->
-<%= render template: 'reviews/index', locals: { reviews: @movie.reviews } %>
+  <figure class="image">
+    <%= image_tag(@movie.poster) if @movie.poster.attached? %>
+  </figure>
+
+  <div class="content my-6">
+    <%= @movie.synopsis %>
+  </div>
+
+  <% if user_signed_in? %>
+    <%= fields_for :review, Review.new do |r| %>
+      <h1 class="title">New Review</h1>
+
+      <%= r.text_field :title, placeholder: "Title", class: "input mb-4" %>
+      <%= r.number_field :rating, placeholder: "Rating", class: "input mb-4" %>
+      <%= r.rich_text_area :content, class: "mb-4", style: "min-height: 25vh;" %>
+      
+      <div class="is-grouped has-text-right">
+        <%= link_to :review, class: "button is-danger is-outlined" do %>
+          <span>Discard</span>
+          <span class="icon is-small">
+            <i class="fas fa-times"></i>
+          </span>
+        <% end %>
+        
+        <button class="button is-success" type="submit">
+          <span>Update</span>
+          <span class="icon is-small">
+            <i class="fas fa-check"></i>
+          </span>
+        </button>
+
+        <!-- add delete button on edit form, change update to create on new form -->
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= render template: 'reviews/index', locals: { reviews: @movie.reviews } %>
+</div>
