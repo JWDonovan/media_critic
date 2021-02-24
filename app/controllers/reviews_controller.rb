@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ReviewsController < ApplicationController
+  layout 'with_header'
+
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_review, only: %i[show edit update destroy]
 
@@ -18,7 +20,9 @@ class ReviewsController < ApplicationController
     if params[:movie_id] && !Movie.exists?(params[:movie_id])
       redirect_to movies_path, alert: 'Movie not found'
     else
-      @review = Review.new(movie_id: params[:movie_id])
+      # @review = Review.new(movie_id: params[:movie_id])
+      # @review = Review.new(movie_id: params[:movie_id], user_id: current_user.id)
+      @review = current_user.reviews.build(movie_id: params[:movie_id])
     end
   end
 
