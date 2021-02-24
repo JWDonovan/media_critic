@@ -1,0 +1,40 @@
+<div class="navbar-item has-dropdown is-hoverable">
+  <a class="navbar-link">
+    <span class="icon">
+      <i class="fas fa-user-circle"></i>
+    </span>
+    <span><%= current_user.email %></span>
+  </a>
+  
+  <div class="navbar-dropdown">
+    <a class="navbar-item" href="/users/<%= current_user.id %>/edit">
+      <span class="icon">
+        <i class="fas fa-sliders-h"></i>
+      </span>
+      <span>Edit Profile</span>
+    </a>
+
+    <a class="navbar-item" href="/destinations/new">
+      <span class="icon">
+        <i class="fas fa-plus-circle"></i>
+      </span>
+      <span>New Destination</span>
+    </a>
+
+    <a class="navbar-item" href="/users/<%= current_user.id %>">
+      <span class="icon">
+        <i class="fas fa-newspaper"></i>
+      </span>
+      <span>My Destinations</span>
+    </a>
+    
+    <hr class="navbar-divider">
+
+    <%= link_to destroy_user_session_url, method: :delete, class: "navbar-item" do %>
+      <span class="icon">
+        <i class="fas fa-sign-out-alt"></i>
+      </span>
+      <span>Log out</span>
+    <% end %>
+  </div>
+</div>

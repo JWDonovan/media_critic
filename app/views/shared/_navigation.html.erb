@@ -1,0 +1,27 @@
+<nav aria-label="main navigation" class="navbar" role="navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/movies">
+      <!--<img alt="logo" src="/images/logo.png">-->
+      Home
+    </a>
+    <a aria-expanded="false" aria-label="menu" class="navbar-burger burger" id="navbar-burger" roles="button">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div class="navbar-menu" id="mobile-navbar">
+    <div class="navbar-start">
+      <a class="navbar-item" href="/movies">Movies</a>
+      <a class="navbar-item" href="/reviews">Reviews</a>
+      <% if signed_in? %>
+        <a class="navbar-item" href="/reviews/new">New Review</a>
+      <% end %>
+    </div>
+
+    <div class="navbar-end">
+      <%= signed_in? ? (render 'shared/navigation_logged_in') : (render 'shared/navigation_logged_out') %>
+    </div>
+  </div>
+</nav>
