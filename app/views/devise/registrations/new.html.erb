@@ -1,29 +1,38 @@
-<h2>Sign up</h2>
+<div class="hero is-fullheight is-primary">
+  <div class="hero-body">
+    <div class="container is-max-desktop" style="max-width: 500px">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "card py-6 px-6 mb-4"}) do |f| %>
+        <h1 class="title has-text-dark mb-6">Sign up</h1>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input mb-4", placeholder: "email" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "input mb-4", placeholder: "password" %><!-- min password length, required, error handling -->
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input mb-4", placeholder: "confirm password" %>
+
+        <button class="button is-success mr-2" type="submit">
+          <span>Sign up</span>
+          <span class="icon">
+            <i class="fas fa-user-plus"></i>
+          </span>
+        </button>
+
+        <%= link_to new_user_session_url, class: "button is-light" do %>
+          <span>Log in</span>
+          <span class="icon">
+            <i class="fas fa-sign-in-alt"></i>
+          </span>
+        <% end %>
+
+        <br>
+
+        <%= link_to user_google_oauth2_omniauth_authorize_path, class: "button is-light mt-4 has-text-centered" do %>
+          <span class="icon" style="font-size: 2rem;">
+            <img src="/images/btn_google_light_normal_ios.svg" alt="Google Plus Logo">
+          </span>
+          <span>Sign in with Google</span>
+        <% end %>
+      <% end %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
