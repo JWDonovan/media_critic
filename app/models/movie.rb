@@ -10,6 +10,7 @@ class Movie < ApplicationRecord
 
   validates :title, :release_year, presence: true
 
+  # add average review method, order by highest review scope, and url to match
   def self.default_scope
     order('created_at DESC')
   end
