@@ -1,11 +1,32 @@
-<%= form_with model: @review do |f| %>
+<%= form_with model: @review, class: "container is-max-desktop mt-6", style: "max-width: 800px;" do |f| %>
+  <h1 class="title"><%= @form_title %></h1>
+
   <% if @review.movie.nil? %>
-    <%= f.select :movie_id, options_from_collection_for_select(Movie.all, :id, :title) %>
+    <div class="select mb-4">
+      <%= f.select :movie_id, options_from_collection_for_select(Movie.all, :id, :title) %>
+    </div>
   <% end %>
   <%= f.hidden_field :movie_id %>
 
-  <%= f.text_field :title %>
-  <%= f.rich_text_area :content %>
-  <%= f.number_field :rating %>
-  <%= f.submit %>
+  <%= f.text_field :title, placeholder: "Title", class: "input mb-4" %>
+  <%= f.number_field :rating, placeholder: "Rating", class: "input mb-4" %>
+  <%= f.rich_text_area :content, class: "mb-4", style: "min-height: 25vh;" %>
+
+  <div class="is-grouped has-text-right">
+    <%= link_to @review, class: "button is-danger is-outlined" do %>
+      <span>Discard</span>
+      <span class="icon is-small">
+        <i class="fas fa-times"></i>
+      </span>
+    <% end %>
+    
+    <button class="button is-success" type="submit">
+      <span>Update</span>
+      <span class="icon is-small">
+        <i class="fas fa-check"></i>
+      </span>
+    </button>
+
+    <!-- add delete button on edit form, change update to create on new form -->
+  </div>
 <% end %>
