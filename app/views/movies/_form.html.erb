@@ -1,7 +1,41 @@
-<%= form_with model: @movie do |f| %>
-  <%= f.text_field :title %>
-  <%= f.file_field :poster %>
-  <%= f.rich_text_area :synopsis %>
-  <%= f.number_field :release_year %>
-  <%= f.submit %>
+<%= form_with model: @movie, class: "container is-max-desktop mt-6", style: "max-width: 800px;" do |f| %>
+  <h1 class="title"><%= @form_title %></h1>
+
+  <%= f.text_field :title, placeholder: "Title", class: "input mb-4" %>
+  <%= f.number_field :release_year, class: "input mb-4" %>
+
+  <div class="file has-name is-fullwidth mb-4">
+    <label class="file-label">
+      <%= f.file_field :poster, class: "file-input" %>
+      <span class="file-cta">
+        <span class="file-icon">
+          <i class="fas fa-upload"></i>
+        </span>
+        <span class="file-label">
+          Choose a movie poster...
+        </span>
+      </span>
+      <span class="file-name"></span>
+    </label>
+  </div>
+  
+  <%= f.rich_text_area :synopsis, class: "mb-4", style: "min-height: 25vh;" %>
+
+  <div class="is-grouped has-text-right">
+    <%= link_to @movie, class: "button is-danger is-outlined" do %>
+      <span>Discard</span>
+      <span class="icon is-small">
+        <i class="fas fa-times"></i>
+      </span>
+    <% end %>
+    
+    <button class="button is-success" type="submit">
+      <span>Update</span>
+      <span class="icon is-small">
+        <i class="fas fa-check"></i>
+      </span>
+    </button>
+
+    <!-- add delete button on edit form, change update to create on new form -->
+  </div>
 <% end %>
