@@ -1,3 +1,21 @@
-<%= @review.title %>
-<%= @review.content %>
-<%= @review.rating %>
+<div class="container is-max-desktop" style="max-width: 800px;">
+  <%= link_to @review, class: "has-text-black mb-6" do %>
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-128x128">
+          <img src="<%= url_for(@review.movie.poster) if @review.movie.poster.attached? %>">
+        </p>
+      </figure>
+
+      <div class="media-content">
+        <div class="content">
+          <strong><%= @review.title %></strong> <small><%= @review.rating %></small>
+          <br>
+          <%= @review.content %>
+        </div>
+      </div>
+    </article>
+  <% end %>
+
+  <!-- add edit and delete review buttons when user is admin or author -->
+</div>

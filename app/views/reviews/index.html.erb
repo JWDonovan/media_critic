@@ -1,6 +1,27 @@
-<h1>Reviews Index</h1>
-<% reviews.each do |r| %>
-<%= r.title %>
-<%= r.content %>
-<%= r.rating %>
-<% end %>
+<div class="container is-max-desktop" style="max-width: 800px;">
+  <h1 class="title">Reviews</h1>
+
+  <% reviews.each do |r| %>
+    <%= link_to r, class: "has-text-black mb-6" do %>
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-128x128">
+            <img src="<%= url_for(r.movie.poster) if r.movie.poster.attached? %>">
+          </p>
+        </figure>
+
+        <div class="media-content">
+          <div class="content">
+            <strong><%= r.title %></strong> <small><%= r.rating %></small>
+            <br>
+            <%= r.content %>
+          </div>
+        </div>
+      </article>
+    <% end %>
+
+    <!-- add edit and delete review buttons when user is admin or author -->
+
+    <hr style="background-color: #2222; margin-top: 5em;">
+  <% end %>
+</div>
