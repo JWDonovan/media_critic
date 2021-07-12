@@ -12,7 +12,7 @@
 
         <div class="media-content">
           <div class="content">
-            <strong><%= m.title %></strong> <small><%= m.release_year %></small>
+            <strong><%= m.title %></strong> <small><%= m.release_year %></small> <small>Rating: <%= m.average_rating > 0 ? m.average_rating : 'N/A' %></small>
             <br>
             <%= m.synopsis %>
           </div>
