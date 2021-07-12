@@ -21,6 +21,14 @@
   
   <%= f.rich_text_area :synopsis, class: "mb-4", style: "min-height: 25vh;" %>
 
+  <hr style="border-bottom: 1px solid #ccc">
+  <h3 class="subtitle">Create Review</h3>
+  <%= f.fields_for :reviews do |r| %>
+    <%= r.text_field :title, placeholder: "Review Title", class: "input mb-4" %>
+    <%= r.number_field :rating, max: 5, min: 0, placeholder: "Rating", class: "input mb-4" %>
+    <%= r.rich_text_area :content, class: "mb-4", style: "min-height: 25vh;" %>
+  <% end %>
+
   <div class="is-grouped has-text-right">
     <%= link_to @movie, class: "button is-danger is-outlined" do %>
       <span>Discard</span>
