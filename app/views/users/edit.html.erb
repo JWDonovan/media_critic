@@ -1,0 +1,39 @@
+<div class="container is-max-desktop" style="max-width: 800px;">
+  <h1 class="title">Edit Profile</h1>
+
+  <%= form_with model: @user do |f| %>
+    <h1 class="subtitle">Change Email</h1>
+    <%= f.email_field :email, placeholder: "Email", class: "input mb-4" %>
+
+    <div class="is-grouped has-text-right">
+      <%= f.submit "Discard", :type => "reset", class: "button is-danger is-light" %>
+      <%= f.submit "Update Email", class: "button is-success" %>
+    </div>
+  <% end %>
+
+  <% if current_user.provider == '' %>
+    <hr style="border-bottom: 1px solid #ccc">
+
+    <%= form_with model: @user, class: "container is-max-desktop mt-6", style: "max-width: 800px;" do |f| %>
+      <h1 class="subtitle">Change Password</h1>
+      <%= f.password_field :password, placeholder: "Current Password", class: "input mb-4" %>
+      <%= f.password_field :new_password, placeholder: "New Password", class: "input mb-4" %>
+      <%= f.password_field :new_password_confirmation, placeholder: "Confirm New Password", class: "input mb-4" %>
+
+      <div class="is-grouped has-text-right">
+        <%= f.submit "Discard", :type => "reset", class: "button is-danger is-light" %>
+        <%= f.submit "Update Password", class: "button is-success" %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <hr style="border-bottom: 1px solid #f14668">
+
+  <!-- delete account form -->
+  <%= link_to user_path(@user.id), method: :delete, data: { confirm: "Are you sure?" }, class: "button is-danger" do %>
+    <span>Delete Account</span>
+    <span class="icon is-small">
+      <i class="fas fa-trash"></i>
+    </span>
+  <% end %>
+</div>
