@@ -6,10 +6,10 @@
       <%= f.select :movie_id, options_from_collection_for_select(Movie.all, :id, :title) %>
     </div>
   <% end %>
-  <%= f.hidden_field :movie_id %>
+  <!--<%= f.hidden_field :movie_id %>-->
 
   <%= f.text_field :title, placeholder: "Title", class: "input mb-4" %>
-  <%= f.number_field :rating, placeholder: "Rating", class: "input mb-4" %>
+  <%= f.number_field :rating, max: 5, min: 0, placeholder: "Rating", class: "input mb-4" %>
   <%= f.rich_text_area :content, class: "mb-4", style: "min-height: 25vh;" %>
 
   <div class="is-grouped has-text-right">
@@ -19,14 +19,7 @@
         <i class="fas fa-times"></i>
       </span>
     <% end %>
-    
-    <button class="button is-success" type="submit">
-      <span>Update</span>
-      <span class="icon is-small">
-        <i class="fas fa-check"></i>
-      </span>
-    </button>
 
-    <!-- add delete button on edit form, change update to create on new form -->
+    <%= f.submit class: "button is-success" %>
   </div>
 <% end %>
