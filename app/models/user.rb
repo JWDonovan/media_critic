@@ -4,14 +4,16 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :movies, through: :reviews
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable, :recoverable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [:google_oauth2]
+  devise :database_authenticatable,
+         :registerable,
+         :validatable,
+         :omniauthable,
+         omniauth_providers: [:google_oauth2]
 
   validates :email, presence: true
-  validates :email, uniqueness: true
+  validates :email, uniqueness: { case_sensitive: false }
+  # validates :password, length: { minimum: 10, maximum: 128 }
+  # validates :admin, inclusion: { in: [true, false] }
 
   def self.from_google(email:, provider:, uid:)
     create_with(uid: uid, provider: provider, password: Devise.friendly_token[0, 20]).find_or_create_by!(email: email)
