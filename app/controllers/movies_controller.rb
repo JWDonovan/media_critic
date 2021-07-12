@@ -13,16 +13,20 @@ class MoviesController < ApplicationController
   end
 
   # /movies/:id
-  def show; end
+  def show
+    @review = Review.new
+  end
 
   # /movies/new
   def new
     @movie = Movie.new
+    @movie.reviews.build()
   end
 
   # POST /movies
   def create
     @movie = Movie.new(movie_params)
+    current_user.reviews << @movie.reviews
 
     if @movie.save
       redirect_to @movie
@@ -30,6 +34,7 @@ class MoviesController < ApplicationController
       render 'new'
     end
   end
+
 
   # /movies/:id/edit
   def edit; end
@@ -52,7 +57,7 @@ class MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:title, :poster, :synopsis, :release_year)
+    params.require(:movie).permit(:title, :poster, :synopsis, :release_year, reviews_attributes: [:id, :title, :rating, :content, user_id: current_user.id])
   end
 
   def set_movie
