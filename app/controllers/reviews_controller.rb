@@ -8,7 +8,16 @@ class ReviewsController < ApplicationController
 
   # /reviews
   def index
-    reviews = Review.all
+    if params[:movie_id]
+      if !Movie.exists?(params[:movie_id])
+        redirect_to movies_path, alert: 'Movie not found'
+      else
+        reviews = Movie.find(params[:movie_id]).reviews
+      end
+    else
+      reviews = Review.all
+    end
+
     render 'index', locals: { reviews: reviews }
   end
 
@@ -17,20 +26,23 @@ class ReviewsController < ApplicationController
 
   # /reviews/new
   def new
-    if params[:movie_id] && !Movie.exists?(params[:movie_id])
-      redirect_to movies_path, alert: 'Movie not found'
-    else
-      # @review = Review.new(movie_id: params[:movie_id])
-      # @review = Review.new(movie_id: params[:movie_id], user_id: current_user.id)
-      @review = current_user.reviews.build(movie_id: params[:movie_id])
+    if params[:movie_id]
+      if !Movie.exists?(params[:movie_id])
+        redirect_to movies_path, alert: 'Movie not found'
+      else
+        @review.movie_id = params[:movie_id]
+      end
     end
+
+    @review = Review.new
   end
 
   # POST /reviews
   def create
     @review = Review.new(review_params)
+    @review.user_id = current_user.id
 
-    if @review.save
+    if !@review.user.movies.exists?(@review.movie.id)&& @review.save
       redirect_to @review
     else
       render 'new'
