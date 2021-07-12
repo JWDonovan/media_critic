@@ -3,21 +3,27 @@
 class MoviesController < ApplicationController
   layout 'with_header'
 
-  before_action :authenticate_user!, except: %i[index show]
-  before_action :admin?, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index highest_rated show]
+  before_action :admin?, except: %i[index highest_rated show]
   before_action :set_movie, only: %i[show edit update destroy]
 
-  # /movies
+  # GET /movies
   def index
     @movies = Movie.all
   end
 
-  # /movies/:id
+  # GET /movies/highest_rated
+  def highest_rated
+    @movies = Movie.highest_rated
+    render 'index'
+  end
+
+  # GET /movies/:id
   def show
     @review = Review.new
   end
 
-  # /movies/new
+  # GET /movies/new
   def new
     @movie = Movie.new
     @movie.reviews.build()
@@ -36,7 +42,7 @@ class MoviesController < ApplicationController
   end
 
 
-  # /movies/:id/edit
+  # GET /movies/:id/edit
   def edit; end
 
   # PATCH /movies/:id
