@@ -1,6 +1,14 @@
 <div class="container is-max-desktop" style="max-width: 800px;">
   <%= link_to @movie, class: "has-text-black" do %>
-    <strong class="title"><%= @movie.title %></strong> <small class="subtitle"><%= @movie.release_year %></small>
+    <strong class="title"><%= @movie.title %></strong> <small class="subtitle"><%= @movie.release_year %></small> <small>Rating: <%= @movie.average_rating > 0 ? @movie.average_rating : 'N/A' %></small>
+
+    <% if current_user.admin? %>
+      <%= link_to movie_path(@movie), method: :delete, data: { confirm: "Are you sure?" }, class: "button is-danger is-pulled-right" do %>
+        <span class="icon is-small">
+          <i class="fas fa-trash"></i>
+        </span>
+      <% end %>
+    <% end %>
   <% end %>
 
   <figure class="image">
@@ -12,13 +20,15 @@
   </div>
 
   <% if user_signed_in? %>
-    <%= fields_for :review, Review.new do |r| %>
+    <%= form_with model: @review do |r| %> <!-- fields_for :review, Review.new do |r| -->
       <h1 class="title">New Review</h1>
 
       <%= r.text_field :title, placeholder: "Title", class: "input mb-4" %>
-      <%= r.number_field :rating, placeholder: "Rating", class: "input mb-4" %>
+      <%= r.number_field :rating, max: 5, min: 0, placeholder: "Rating", class: "input mb-4" %>
       <%= r.rich_text_area :content, class: "mb-4", style: "min-height: 25vh;" %>
-      
+
+      <%= r.hidden_field :movie_id, value: @movie.id %>
+
       <div class="is-grouped has-text-right">
         <%= link_to :review, class: "button is-danger is-outlined" do %>
           <span>Discard</span>
@@ -33,11 +43,9 @@
             <i class="fas fa-check"></i>
           </span>
         </button>
-
-        <!-- add delete button on edit form, change update to create on new form -->
       </div>
     <% end %>
   <% end %>
 
-  <%= render template: 'reviews/index', locals: { reviews: @movie.reviews } %>
+  <%= render template: 'reviews/index', locals: { reviews: @movie.reviews } unless @movie.reviews.first.nil? %>
 </div>
