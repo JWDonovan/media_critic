@@ -1,9 +1,5 @@
 <nav aria-label="main navigation" class="navbar" role="navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="/movies">
-      <!--<img alt="logo" src="/images/logo.png">-->
-      Home
-    </a>
     <a aria-expanded="false" aria-label="menu" class="navbar-burger burger" id="navbar-burger" roles="button">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -17,6 +13,10 @@
       <a class="navbar-item" href="/reviews">Reviews</a>
       <% if signed_in? %>
         <a class="navbar-item" href="/reviews/new">New Review</a>
+
+        <% if current_user.admin? %>
+          <a class="navbar-item" href="/movies/new">New Movie</a>
+        <% end %>
       <% end %>
     </div>
 
