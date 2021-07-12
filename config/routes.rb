@@ -3,6 +3,8 @@
 Rails.application.routes.draw do
   root 'movies#index'
 
+  get '/movies/highest_rated', action: :highest_rated, controller: 'movies'
+
   resources :movies
   resources :reviews
 
