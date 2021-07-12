@@ -10,6 +10,7 @@
       <div class="media-content">
         <div class="content">
           <strong><%= @review.title %></strong> <small><%= @review.rating %></small>
+          <p>by: <%= @review.user.email %></p>
           <br>
           <%= @review.content %>
         </div>
