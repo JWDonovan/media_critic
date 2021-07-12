@@ -72,6 +72,20 @@ review_list = [
     'Die Hard is my favorite movie',
     'Not sure if it\'s a Christmas movie though.',
     4.0,
+    Movie.last.id,
+    User.first.id
+  ],
+  [
+    'A Christmas Classic!',
+    'What else can I say',
+    5.0,
+    Movie.last.id,
+    User.first.id
+  ],
+  [
+    'Not my favorite',
+    'Too spooky.',
+    1.0,
     Movie.first.id,
     User.first.id
   ]
