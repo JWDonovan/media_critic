@@ -33,5 +33,9 @@ module MediaCritic
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+      "<div class=\"field_with_errors control-group error\">#{html_tag}</div>".html_safe
+    }
   end
 end
