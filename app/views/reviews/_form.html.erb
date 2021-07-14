@@ -8,9 +8,9 @@
   <% end %>
   <!--<%= f.hidden_field :movie_id %>-->
 
-  <%= f.text_field :title, placeholder: "Title", class: "input mb-4" %>
-  <%= f.number_field :rating, max: 5, min: 0, placeholder: "Rating", class: "input mb-4" %>
-  <%= f.rich_text_area :content, class: "mb-4", style: "min-height: 25vh;" %>
+  <%= f.text_field :title, autocomplete: "off", placeholder: "Title", class: "input mb-4", required: true %>
+  <%= f.number_field :rating, max: 5, min: 0, placeholder: "Rating", class: "input mb-4", required: true %>
+  <%= f.rich_text_area :content, class: "mb-4", style: "min-height: 25vh;", required: true %>
 
   <div class="is-grouped has-text-right">
     <%= link_to @review, class: "button is-danger is-outlined" do %>

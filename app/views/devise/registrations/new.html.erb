@@ -6,9 +6,9 @@
 
         <%= render "devise/shared/error_messages", resource: resource %>
 
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input mb-4", placeholder: "email" %>
-        <%= f.password_field :password, autocomplete: "current-password", class: "input mb-4", placeholder: "password" %><!-- min password length, required, error handling -->
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input mb-4", placeholder: "confirm password" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "off", class: "input mb-4", placeholder: "email", required: true %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "input mb-4", placeholder: "password", required: true %><!-- min password length, error handling -->
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input mb-4", placeholder: "confirm password", required: true %>
 
         <button class="button is-success mr-2" type="submit">
           <span>Sign up</span>

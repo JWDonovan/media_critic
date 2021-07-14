@@ -1,12 +1,12 @@
 <%= form_with model: @movie, class: "container is-max-desktop mt-6", style: "max-width: 800px;" do |f| %>
   <h1 class="title"><%= @form_title %></h1>
 
-  <%= f.text_field :title, placeholder: "Title", class: "input mb-4" %>
-  <%= f.number_field :release_year, class: "input mb-4" %>
+  <%= f.text_field :title, autocomplete: "off", placeholder: "Title", class: "input mb-4", required: true %>
+  <%= f.number_field :release_year, class: "input mb-4", required: true %>
 
   <div class="file has-name is-fullwidth mb-4">
     <label class="file-label">
-      <%= f.file_field :poster, class: "file-input" %>
+      <%= f.file_field :poster, class: "file-input", required: true %>
       <span class="file-cta">
         <span class="file-icon">
           <i class="fas fa-upload"></i>
@@ -19,14 +19,14 @@
     </label>
   </div>
   
-  <%= f.rich_text_area :synopsis, class: "mb-4", style: "min-height: 25vh;" %>
+  <%= f.rich_text_area :synopsis, class: "mb-4", style: "min-height: 25vh;", required: true %>
 
   <hr style="border-bottom: 1px solid #ccc">
   <h3 class="subtitle">Create Review</h3>
   <%= f.fields_for :reviews do |r| %>
-    <%= r.text_field :title, placeholder: "Review Title", class: "input mb-4" %>
-    <%= r.number_field :rating, max: 5, min: 0, placeholder: "Rating", class: "input mb-4" %>
-    <%= r.rich_text_area :content, class: "mb-4", style: "min-height: 25vh;" %>
+    <%= r.text_field :title, autocomplete: "off", placeholder: "Review Title", class: "input mb-4", required: true %>
+    <%= r.number_field :rating, max: 5, min: 0, placeholder: "Rating", class: "input mb-4", required: true %>
+    <%= r.rich_text_area :content, class: "mb-4", style: "min-height: 25vh;", required: true %>
   <% end %>
 
   <div class="is-grouped has-text-right">
