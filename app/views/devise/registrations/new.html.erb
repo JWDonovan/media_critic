@@ -1,13 +1,13 @@
 <div class="hero is-fullheight is-primary">
   <div class="hero-body">
     <div class="container is-max-desktop" style="max-width: 500px">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "card py-6 px-6 mb-4"}) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => "card py-6 px-6 mb-4"}) do |f| %>
         <h1 class="title has-text-dark mb-6">Sign up</h1>
 
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <%= f.email_field :email, autofocus: true, autocomplete: "off", class: "input mb-4", placeholder: "email", required: true %>
-        <%= f.password_field :password, autocomplete: "current-password", class: "input mb-4", placeholder: "password", required: true %><!-- min password length, error handling -->
+        <%= f.password_field :password, autocomplete: "new-password", class: "input mb-4", placeholder: "password", required: true %><!-- min password length, error handling -->
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input mb-4", placeholder: "confirm password", required: true %>
 
         <button class="button is-success mr-2" type="submit">
