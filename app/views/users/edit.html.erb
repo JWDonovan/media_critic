@@ -14,11 +14,11 @@
   <% if current_user.provider == '' %>
     <hr style="border-bottom: 1px solid #ccc">
 
-    <%= form_with model: @user, class: "container is-max-desktop mt-6", style: "max-width: 800px;" do |f| %>
+    <%= form_with model: @user, url: registration_path(@user), method: :put, class: "container is-max-desktop mt-6", style: "max-width: 800px;" do |f| %>
       <h1 class="subtitle">Change Password</h1>
-      <%= f.password_field :password, placeholder: "Current Password", class: "input mb-4" %>
-      <%= f.password_field :new_password, placeholder: "New Password", class: "input mb-4" %>
-      <%= f.password_field :new_password_confirmation, placeholder: "Confirm New Password", class: "input mb-4" %>
+      <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "Current Password", class: "input mb-4" %>
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "New Password", class: "input mb-4" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm New Password", class: "input mb-4" %>
 
       <div class="is-grouped has-text-right">
         <%= f.submit "Discard", :type => "reset", class: "button is-danger is-light" %>
